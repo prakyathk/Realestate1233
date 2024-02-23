@@ -1,0 +1,21 @@
+
+
+.my-custom-navbar {
+    background-color: #f8f8f8; /* Background color */
+    border-color: #e7e7e7; /* Border color */
+    padding: 10px; /* Add padding as needed */
+  }
+  
+  .my-custom-navbar a {
+    color: #333; /* Nav link text color */
+    margin-right: 15px; /* Add spacing between links */
+    text-decoration: none; /* Remove underline from links */
+    font-weight: bold; /* Make the text bold */
+  }
+  
+  .my-custom-navbar a:hover {
+    background-color: #e7e7e7; /* Nav link hover background color */
+    border-radius: 5px; /* Add rounded corners on hover */
+  }
+
+  
