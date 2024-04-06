@@ -5,47 +5,47 @@ import { Form, Button, Container } from "react-bootstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const UpdateSellerComponent = () => {
+const UpdateBuyerComponent = () => {
   const navigate = useNavigate();
-  const { sellerId } = useParams();
-  const [sellerData, setSellerData] = useState({
-    sellerId: "",
-    sellerFirstName: "",
-    sellerLastName: "",
-    sellerPhoneNo: "",
-    sellerMobileNo: "",
-    sellerAddres: "",
-    sellerEmail: "",
+  const { buyersId } = useParams();
+  const [buyerData, setBuyerData] = useState({
+    buyerId: "",
+    buyerFirstName: "",
+    buyerLastName: "",
+    buyerPhoneNo: "",
+    buyerMobileNo: "",
+    buyerAddress: "",
+    buyerEmail: "",
   });
 
   useEffect(() => {
-    const getSeller = async () => {
+    const getBuyer = async () => {
       try {
-        const response = await axios.get(`http://localhost:8081/seller/fetchbyid/${sellerId}`);
-        setSellerData(response.data);
+        const response = await axios.get(`http://localhost:8081/buyer/fetchbyid/${buyersId}`);
+        setBuyerData(response.data);
       } catch (error) {
-        console.error("Error fetching seller data:", error);
+        console.error("Error fetching buyer data:", error);
       }
     };
 
-    if (sellerId) {
-      getSeller();
+    if (buyersId) {
+      getBuyer();
     }
-  }, [sellerId]);
+  }, [buyersId]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setSellerData((prevData) => ({ ...prevData, [name]: value }));
+    setBuyerData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:8081/seller/update/${sellerId}`, sellerData);
-      console.log("Seller updated successfully");
-      navigate('/ListSellerComponent');
+      await axios.put(`http://localhost:8081/buyer/update/${buyersId}`, buyerData);
+      console.log("Buyer updated successfully");
+      navigate('/ListBuyerComponent');
     } catch (error) {
-      console.error("Error updating seller:", error);
+      console.error("Error updating buyer:", error);
     }
   };
 
@@ -56,17 +56,17 @@ const UpdateSellerComponent = () => {
       <div className="row">
         <div className="container">
           <h2 className="text-center">
-            Update Sellers
+            <Link to="/BuyerComponent">Update Buyer</Link>
           </h2>
           <div className="container2">
             <Form>
               <Form.Group className="mb-3">
-                <Form.Label>Seller Id :</Form.Label>
+                <Form.Label>Buyer Id :</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Seller Id"
-                  name="sellerId"
-                  value={sellerData.sellerId}
+                  placeholder="Buyer Id"
+                  name="buyersId"
+                  value={buyerData.buyersId}
                   disabled
                 />
               </Form.Group>
@@ -76,8 +76,8 @@ const UpdateSellerComponent = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter first name"
-                  name="sellerFirstName"
-                  value={sellerData.sellerFirstName}
+                  name="buyerFirstName"
+                  value={buyerData.buyerFirstName}
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -87,8 +87,8 @@ const UpdateSellerComponent = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter last name"
-                  name="sellerLastName"
-                  value={sellerData.sellerLastName}
+                  name="buyerLastName"
+                  value={buyerData.buyerLastName}
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -98,8 +98,8 @@ const UpdateSellerComponent = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter PhoneNo"
-                  name="sellerPhoneNo"
-                  value={sellerData.sellerPhoneNo}
+                  name="buyerPhoneNo"
+                  value={buyerData.buyerPhoneNo}
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -109,8 +109,8 @@ const UpdateSellerComponent = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter MobileNo"
-                  name="sellerMobileNo"
-                  value={sellerData.sellerMobileNo}
+                  name="buyerMobileNo"
+                  value={buyerData.buyerMobileNo}
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -120,8 +120,8 @@ const UpdateSellerComponent = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter Address"
-                  name="sellerAddres"
-                  value={sellerData.sellerAddres}
+                  name="buyerAddress"
+                  value={buyerData.buyerAddress}
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -131,8 +131,8 @@ const UpdateSellerComponent = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter Email"
-                  name="sellerEmail"
-                  value={sellerData.sellerEmail}
+                  name="buyerEmail"
+                  value={buyerData.buyerEmail}
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -144,7 +144,7 @@ const UpdateSellerComponent = () => {
                 }}
               >
                 Update
-                 </Button>
+              </Button>
             </Form>
           </div>
         </div>
@@ -153,4 +153,4 @@ const UpdateSellerComponent = () => {
   );
 };
 
-export default UpdateSellerComponent;
+export default UpdateBuyerComponent;

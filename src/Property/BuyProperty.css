@@ -1,0 +1,30 @@
+.property-image {
+    width: 50%; /* Make the image take up 50% of the container width */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Ensure the image is displayed as a block element */
+    margin: 0 auto; /* Center the image horizontally */
+  }
+  .property-details {
+    border: 1px solid #ccc; /* Add a border around the property details section */
+    padding: 20px; /* Add padding for better spacing */
+    margin-top: 20px; /* Add margin at the top to separate it from the image */
+    background-color: #f9f9f9; /* Add a light background color */
+  }
+  
+  .property-details p {
+    margin: 10px 0; /* Add margin to each paragraph for better spacing */
+  }
+  
+  .property-details h2 {
+    font-size: 1.5rem; /* Increase font size for headings */
+    margin-bottom: 10px; /* Add margin at the bottom of headings */
+  }
+  
+  .property-details strong {
+    font-weight: bold; /* Make strong text bold */
+  }
+  
+  .property-details button {
+    margin-top: 20px; /* Add margin at the top of the button for spacing */
+  }
+    

@@ -1,16 +1,16 @@
-/** @format */
-
-import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Table, Button } from "react-bootstrap";
 import { findallseller, deleteseller } from "../EstateService";
 import PaginationComponent from "../PaginationComponent";
 import "../App.css";
+
 const ListSellerComponent = () => {
   const [sellers, setSellers] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [sellersPerPage] = useState(10);
-
+  const [currentPage, setCurrentPage]=useState(1);
+  const [recordsPerPage]=useState(10);
+  const indexOfLastRecord = currentPage * recordsPerPage;
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
   useEffect(() => {
     findallseller()
       .then((response) => {
@@ -34,23 +34,23 @@ const ListSellerComponent = () => {
     }
   };
 
+  const currentRecords = sellers.slice(indexOfFirstRecord, indexOfLastRecord);
  
-  const indexOfLastSeller = currentPage * sellersPerPage;
-  const indexOfFirstSeller = indexOfLastSeller - sellersPerPage;
-  const currentSellers = sellers.slice(indexOfFirstSeller, indexOfLastSeller);
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const nPages = Math.ceil(sellers.length / recordsPerPage)
 
   return (
     <div>
-      <h2 className='text-center'>List of Sellers</h2>
-      <h3>
-        <Link to='/SellerComponent'>ADD SELLER</Link>
-      </h3>
-      <div className='table-responsive'>
-        <table class='table table-bordered border-primary  '>
+      <h2 className="text-center">List of Sellers</h2>
+      <Button variant="primary" className="mb-3">
+        <Link to="/SellerComponent" style={{ color: "white", textDecoration: "none" }}>
+          ADD PROPERTY
+        </Link>
+      </Button>
+      <div className="table-responsive">
+        <Table bordered hover>
           <thead>
             <tr>
+              <th>Seller Id</th>
               <th>First Name</th>
               <th>Last Name</th>
               <th>Phone No</th>
@@ -61,8 +61,9 @@ const ListSellerComponent = () => {
             </tr>
           </thead>
           <tbody>
-            {currentSellers.map((seller) => (
+            {currentRecords.map((seller) => (
               <tr key={seller.sellerId}>
+                <td>{seller.sellerId}</td>
                 <td>{seller.sellerFirstName}</td>
                 <td>{seller.sellerLastName}</td>
                 <td>{seller.sellerPhoneNo}</td>
@@ -70,37 +71,32 @@ const ListSellerComponent = () => {
                 <td>{seller.sellerAddres}</td>
                 <td>{seller.sellerEmail}</td>
                 <td>
-                  <button class='btn btn-info'>
-                    {" "}
-                    <Link
-                      to={`/ViewSellerComponent/fetchbyid/${seller.sellerId}`}>
+                  <Button variant="info">
+                    <Link to={`/ViewSellerComponent/fetchbyid/${seller.sellerId}`}>
                       View
                     </Link>
-                  </button>
-                  <button class='btn btn-info'>
-                    {" "}
+                  </Button>
+                  <Button variant="info">
                     <Link to={`/UpdateSellerComponent/${seller.sellerId}`}>
                       Update
                     </Link>
-                  </button>
-                  <button
-                    className='btn btn-danger'
+                  </Button>
+                  <Button
+                    variant="danger"
                     onClick={() => deleteSeller(seller.id)}>
                     Delete
-                  </button>
+                  </Button>
                 </td>
-               
               </tr>
             ))}
           </tbody>
-        </table>
-        <div class='pagination'>
+        </Table>
+        <div className="pagination">
         <PaginationComponent
-            sellersPerPage={sellersPerPage}
-            totalSellers={sellers.length}
-            currentPage={currentPage}
-            paginate={paginate}
-          />
+          nPages={nPages}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
         </div>
       </div>
     </div>

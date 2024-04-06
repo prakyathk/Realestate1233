@@ -1,74 +1,74 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import { updateEstateSeller, insertseller, getSeller, deleteseller } from "../EstateService";
-import UpdateSellerComponent from "./UpdateSellerComponent";
+import { updateEstateBuyer, addbuyers, fetchbuyer } from "../EstateService";
+import UpdateBuyerComponent from "./UpdateBuyerComponent";
 import { Form, Button, Container } from "react-bootstrap";
 import "..//App.css";
 
-const SellerComponent = () => {
-  const [seller, setSeller] = useState({
-    sellerFirstName: "",
-    sellerLastName: "",
-    sellerPhoneNo: "",
-    sellerMobileNo: "",
-    sellerAddres: "",
-    sellerEmail: "",
+const BuyerComponent = () => {
+  const [buyer, setBuyer] = useState({
+    buyerFirstName: " ",
+    buyerLastName: " ",
+    buyerPhoneNo: " ",
+    buyerMobileNo: " ",
+    buyerAddres: " ", 
+    buyerEmail: "  ",
   });
 
   const navigate = useNavigate();
-  const { sellerId } = useParams();
+  const { buyersId } = useParams();
 
   useEffect(() => {
-    if (sellerId) {
-      getSeller(sellerId)
+    if (buyersId) {
+        fetchbuyer(buyersId)
         .then((response) => {
-          setSeller(response.data);
+          setBuyer(response.data);
         })
         .catch((error) => {
           console.log(error);
         });
     }
-  }, [sellerId]);
+  }, [buyersId]);
 
   const handleChange = (e) => {
-    setSeller({
-      ...seller,
+    setBuyer({
+      ...buyer,
       [e.target.name]: e.target.value,
-      id: sellerId,
+      id: buyersId,
     });
   };
 
-  const saveOrUpdateEstateSeller = (e) => {
+  const saveOrUpdateEstateBuyer = (e) => {
     e.preventDefault();
 
     const requiredFields = [
-      "sellerFirstName",
-      "sellerLastName",
-      "sellerPhoneNo",
-      "sellerMobileNo",
-      "sellerAddres",
-      "sellerEmail",
+      "buyerFirstName",
+      "buyerLastName",
+      "buyerPhoneNo",
+      "buyerMobileNo",
+      "buyerAddres",
+      "buyerEmail",
     ];
 
-    if (requiredFields.some((field) => !seller[field])) {
+    if (requiredFields.some((field) => !buyer[field])) {
       alert("Please fill in all fields");
       return;
     }
 
-    if (sellerId) {
-      updateEstateSeller(sellerId, seller)
+    if (buyersId) {
+      updateEstateBuyer(buyersId, buyer)
         .then(() => {
-          console.log("Update successful:", seller);
-          navigate("/ListSellerComponent");
+          console.log("Update successful:", buyer);
+          navigate("/ListBuyerComponent");
         })
         .catch((error) => {
           console.error("Update failed:", error);
         });
     } else {
-      insertseller(seller)
+        addbuyers(buyer)
         .then(() => {
-          console.log("Insert successful:", seller);
-          navigate("/ListSellerComponent");
+          console.log("Insert successful:", buyer);
+          navigate("/ListBuyerComponent");
         })
         .catch((error) => {
           console.error("Insert failed:", error);
@@ -76,12 +76,12 @@ const SellerComponent = () => {
     }
   };
 
-  const deleteSeller = (sellerId) => {
-    if (window.confirm("Are you sure you want to delete this seller?")) {
-      deleteseller(sellerId)
+  const deletebuyer = (buyersId) => {
+    if (window.confirm("Are you sure you want to delete this buyer?")) {
+        deletebuyer(buyersId)
         .then(() => {
-          console.log("Seller deleted successfully");
-          getSeller(); // Assuming there's a getSellers function to refresh the seller list
+          console.log("Buyer deleted successfully");
+          fetchbuyer(); // Assuming there's a getBuyers function to refresh the buyer list
         })
         .catch((error) => {
           console.error("Delete failed:", error);
@@ -96,7 +96,7 @@ const SellerComponent = () => {
       <div className="row">
         <div className="container">
           <h2 className="text-center">
-            <Link to="/SellerComponent">{sellerId ? "Update Seller" : "Add Seller"}</Link>
+            <Link to="/BuyerComponent">{buyersId ? "Update Buyer" : "Add Buyer"}</Link>
           </h2>
           <div className="container2">
             <Form>
@@ -105,8 +105,8 @@ const SellerComponent = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter first name"
-                  name="sellerFirstName"
-                  value={seller.sellerFirstName}
+                  name="buyerFirstName"
+                  value={buyer.buyerFirstName}
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -116,52 +116,52 @@ const SellerComponent = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter last name"
-                  name="sellerLastName"
-                  value={seller.sellerLastName}
+                  name="buyerLastName"
+                  value={buyer.buyerLastName}
                   onChange={handleChange}
                 />
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label>Seller Phone No :</Form.Label>
+                <Form.Label>Buyer Phone No :</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter PhoneNo"
-                  name="sellerPhoneNo"
-                  value={seller.sellerPhoneNo}
+                  name="buyerPhoneNo"
+                  value={buyer.buyerPhoneNo}
                   onChange={handleChange}
                 />
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label>Seller Mobile No :</Form.Label>
+                <Form.Label>Buyer Mobile No :</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter MobileNo"
-                  name="sellerMobileNo"
-                  value={seller.sellerMobileNo}
+                  name="buyerMobileNo"
+                  value={buyer.buyerMobileNo}
                   onChange={handleChange}
                 />
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label>Seller Address :</Form.Label>
+                <Form.Label>Buyer Address :</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter Address"
-                  name="sellerAddres"
-                  value={seller.sellerAddres}
+                  name="buyerAddres"
+                  value={buyer.buyerAddres}
                   onChange={handleChange}
                 />
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label>Seller Email :</Form.Label>
+                <Form.Label>Buyer Email :</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter Email"
-                  name="sellerEmail"
-                  value={seller.sellerEmail}
+                  name="buyerEmail"
+                  value={buyer.buyerEmail}
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -169,16 +169,16 @@ const SellerComponent = () => {
               <Button
                 variant="success"
                 onClick={(e) => {
-                  saveOrUpdateEstateSeller(e);
+                  saveOrUpdateEstateBuyer(e);
                 }}
-              >
-                {sellerId ? "Update" : "Save"}
-              </Button>
+              ><Link to="/ListBuyerComponent">
+                {buyersId ? "Update" : "Save"}
+                </Link> </Button>
 
-              {sellerId && (
+              {buyersId && (
                 <Button
                   variant="danger"
-                  onClick={() => deleteSeller(seller.id)}
+                  onClick={() => deletebuyer(buyer.id)}
                 >
                   Delete
                 </Button>
@@ -188,10 +188,10 @@ const SellerComponent = () => {
         </div>
       </div>
 
-      {/* Conditional rendering of UpdateSellerComponent */}
-      {sellerId && <UpdateSellerComponent />}
+      {/* Conditional rendering of UpdateBuyerComponent */}
+      {buyersId && <UpdateBuyerComponent />}
     </Container>
   );
 };
 
-export default SellerComponent;
+export default BuyerComponent;

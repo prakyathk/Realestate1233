@@ -1,4 +1,4 @@
-/** @format */
+
 
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -61,7 +61,7 @@ const PropertyComponent = () => {
       addEstateprop(property)
         .then(() => {
           console.log("added succusfully:", property);
-          navigate("/estate-properties");
+          navigate("/ListPropertyComponent");
         })
         .catch((error) => {
           console.error("Insert failed:", error);
@@ -118,7 +118,7 @@ const PropertyComponent = () => {
               className='btn btn-success'
               onClick={(e) => {
                 saveorUpdateEstateProperty(e);
-                navigate("/estte-properties");
+                navigate("/ListPropertyComponent");
               }}>
               {propertyId ? "Update" : "Save"}
             </button>
