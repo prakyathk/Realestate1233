@@ -5,7 +5,7 @@ import PropertyCard from './PropertyCard';
 import PaginationComponent from '../PaginationComponent';
 
 const PropertyList = () => {
-  const propertiesPerPage = 6; // Set the number of properties per page
+  const propertiesPerPage = 6; 
   const [currentPage, setCurrentPage] = useState(1);
 
   const generateRandomProperties = () => {
@@ -16,7 +16,7 @@ const PropertyList = () => {
       properties.push({
         id: i,
         location: `Location ${i}`,
-        type: 'House', // Replace with your logic for randomizing types
+        type: 'House', 
         bedrooms: Math.floor(Math.random() * 5) + 1,
         bathrooms: Math.floor(Math.random() * 3) + 1,
         size: Math.floor(Math.random() * 3000) + 500,
@@ -36,7 +36,7 @@ const PropertyList = () => {
   };
 
   const handleInquireClick = (property) => {
-    // Add logic for property inquiry
+    
     console.log('Inquire about property:', property);
   };
 

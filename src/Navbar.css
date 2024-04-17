@@ -1,21 +1,68 @@
 
+.navmain{
+  background-color: #d4b3b3;
+}
+.navbar {
+ background-color: bisque;
+  background-position: center; /* Center the background image */
+  padding: 20px 0; /* Padding top and bottom */
+}
 
-.my-custom-navbar {
-    background-color: #f8f8f8; /* Background color */
-    border-color: #e7e7e7; /* Border color */
-    padding: 10px; /* Add padding as needed */
-  }
-  
-  .my-custom-navbar a {
-    color: #333; /* Nav link text color */
-    margin-right: 15px; /* Add spacing between links */
-    text-decoration: none; /* Remove underline from links */
-    font-weight: bold; /* Make the text bold */
-  }
-  
-  .my-custom-navbar a:hover {
-    background-color: #e7e7e7; /* Nav link hover background color */
-    border-radius: 5px; /* Add rounded corners on hover */
-  }
+.navbar-brand {
+  font-size: 24px;
+  font-weight: bold;
+  color: #e31c1c;
+}
 
-  
+.navbar-brand:hover {
+  color: #22f7f4; /* Yellow hover color */
+}
+
+.navbar-toggler {
+  border: none; /* Remove border */
+}
+
+.nav-link {
+  font-size: 18px;
+  color: #bd1c1c; /* White text color */
+  margin-right: 20px; /* Add margin between links */
+}
+
+.nav-link:hover {
+  color: #15efef; /* Yellow hover color */
+}
+
+.navbar-nav .nav-link.active {
+  color: #40fbee; /* Yellow active color */
+}
+
+.navbar-nav .nav-link:focus {
+  color: #13f8e1; /* Yellow focus color */
+}
+
+.dropdown-item {
+  font-size: 16px;
+  color: #1a1a1a; /* Dark text color */
+}
+
+.dropdown-item:hover {
+  background-color: #3000c1; /* Yellow hover background color */
+  color: #1a1a1a; /* Dark text color */
+}
+
+.dropdown-menu {
+  border: none; /* Remove border */
+}
+
+.dropdown-menu.show {
+  background-color: #1a1a1a; /* Dark background color */
+  border: none; /* Remove border */
+}
+
+.dropdown-menu.show .dropdown-item {
+  color: #fff; /* White text color */
+}
+
+.dropdown-menu.show .dropdown-item:hover {
+  background-color: transparent; /* Remove hover background color */
+}

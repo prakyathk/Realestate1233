@@ -27,4 +27,18 @@
   .property-details button {
     margin-top: 20px; /* Add margin at the top of the button for spacing */
   }
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.image-container {
+    width: 50%; /* Adjust width as needed */
+    margin-right: 20px; /* Adjust margin as needed */
+}
+
+.details-container {
+    width: 50%; /* Adjust width as needed */
+}
     

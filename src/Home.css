@@ -1,4 +1,5 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
+
+ @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
 * {
   padding: 0;
   margin: 0;
@@ -171,7 +172,7 @@ img {
   .back {
     height: 30vh;
   }
-} */
+} 
 .listings {
     display: flex;
     flex-direction: column;
@@ -238,4 +239,40 @@ img {
     font-size: 16px;
   }
   
+
+  .property-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
   
+  .property-card {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    width: 300px;
+  } 
+   
+
+   body {
+    /* background: linear-gradient(5deg, rgb(225, 5, 152) 0%, rgba(225, 5, 34, 0) 70%) repeat scroll 0% 0%, linear-gradient(135deg, rgb(26, 1, 117) 10%, rgba(49, 5, 209, 0) 80%) repeat scroll 0% 0%, linear-gradient(225deg, hsla(179, 91%, 45%, 1) 10%, rgba(10, 219, 216, 0) 80%) repeat scroll 0% 0%, rgba(0, 0, 0, 0) linear-gradient(315deg, rgb(189, 5, 245) 100%, rgba(9, 245, 5, 0) 70%) repeat scroll 0% 0%; */
+    /* Path to your background image */
+    background-size: cover; /* Cover the entire area */
+    background-position: center; /* Center the background image */
+  }
+  
+  .listings {
+    padding: 20px 0; /* Add padding to listings */
+  }
+  
+  .filters {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background color for filters */
+    padding: 20px; /* Add padding to filters */
+    margin-bottom: 20px; /* Add margin at the bottom */
+  }
+  
+  input[type="text"],
+  select {
+    margin-right: 10px; /* Adjust margin */
+  }

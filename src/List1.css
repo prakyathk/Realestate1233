@@ -70,9 +70,7 @@
     color: white;
     cursor: pointer;
   }
-  /* list.css */
-
-/* Style for the container */
+ 
 
 
 .list-container h1 {
@@ -125,4 +123,7 @@ h1{
 p{
   text-align: center;
   color: rgb(209, 248, 15);
+}
+.property-details{
+  background-color: #d4b3b3;
 }

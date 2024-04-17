@@ -122,24 +122,25 @@ const Home = () => {
   const [search, setSearch] = useState('');
   const [propertyType, setPropertyType] = useState('All');
   const [priceRange, setPriceRange] = useState('All');
-  const [properties, setProperties] = useState([]);
   const [filteredProperties, setFilteredProperties] = useState([]);
+  // const [properties, setProperties] = useState([]);
+  // const [filteredProperties, setFilteredProperties] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchProperties = async () => {
+  //     try {
+  //       const response = await axios.get('http://localhost:8081/property/details');
+  //       setProperties(response.data);
+  //     } catch (error) {
+  //       console.error('Error fetching properties:', error);
+  //     }
+  //   };
+
+  //   fetchProperties();
+  // }, []);
 
   useEffect(() => {
-    const fetchProperties = async () => {
-      try {
-        const response = await axios.get('http://localhost:8081/property/details');
-        setProperties(response.data);
-      } catch (error) {
-        console.error('Error fetching properties:', error);
-      }
-    };
-
-    fetchProperties();
-  }, []);
-
-  useEffect(() => {
-    let filteredProperties = [...properties];
+    let filteredProperties = [ ];
 
     if (search) {
       filteredProperties = filteredProperties.filter(
@@ -162,7 +163,7 @@ const Home = () => {
     }
 
     setFilteredProperties(filteredProperties);
-  }, [search, propertyType, priceRange, properties]);
+  }, [search, propertyType, priceRange]);
 
   const handleSearchChange = (event) => {
     setSearch(event.target.value);
@@ -202,12 +203,12 @@ const Home = () => {
 
         <button>Search</button>
       </div>
-
+{/* 
       <div className="property-cards">
         {filteredProperties.map((property) => (
           <PropertyCard key={property.id || property._id || Math.random().toString(36).substring(7)} property={property} />
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -535,6 +535,136 @@
 
 
 
+// import './List1.css';
+// import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
+// import { MDBBtn } from 'mdb-react-ui-kit';
+// import { Link } from 'react-router-dom';
+// import { Button } from 'react-bootstrap';
+
+// const List = () => {
+//   const [imagesData, setImagesData] = useState([]);
+//   const [images, setImages] = useState([]);
+//   const [properties, setProperties] = useState([]);
+//   const [deals, setDeals] = useState([]);
+//   const [categories, setCategories] = useState([]);
+//   const [search, setSearch] = useState('');
+
+//   useEffect(() => {
+//     const fetchImagesData = async () => {
+//       try {
+//         const response = await axios.get('http://localhost:8081/image/fileSystem/get');
+//         setImagesData(response.data);
+//       } catch (error) {
+//         console.error('Error fetching images data:', error);
+//       }
+//     };
+
+//     const findallproperties = async () => {
+//       try {
+//         const response = await axios.get('http://localhost:8081/property/fetch');
+//         setProperties(response.data);
+//       } catch (error) {
+//         console.error('Error fetching properties:', error);
+//       }
+//     };
+
+//     const fetchDeals = async () => {
+//       try {
+//         const response = await axios.get('http://localhost:8081/deal/fetch');
+//         setDeals(response.data);
+//       } catch (error) {
+//         console.error('Error fetching deals:', error);
+//       }
+//     };
+
+//     const fetchCategories = async () => {
+//       try {
+//         const response = await axios.get('http://localhost:8081/propertycategory/fetchall');
+//         setCategories(response.data);
+//       } catch (error) {
+//         console.error('Error fetching categories:', error);
+//       }
+//     };
+
+//     fetchImagesData();
+//     findallproperties();
+//     fetchDeals();
+//     fetchCategories();
+//   }, []);
+
+//   const fetchAndDisplayImages = async () => {
+//     const encodedImages = await Promise.all(
+//       imagesData.map(async (image) => {
+//         try {
+//           const response = await axios.get(`http://localhost:8081/image/fileSystem/${image.name}`, {
+//             responseType: 'blob',
+//           });
+//           const blob = new Blob([response.data], { type: image.type });
+//           return URL.createObjectURL(blob);
+//         } catch (error) {
+//           console.error('Error fetching image:', error);
+//           return null;
+//         }
+//       })
+//     );
+
+//     return encodedImages;
+//   };
+
+//   useEffect(() => {
+//     const displayImages = async () => {
+//       const encodedImages = await fetchAndDisplayImages();
+//       setImages(encodedImages);
+//     };
+
+//     displayImages();
+//   }, [imagesData]);
+
+//   const handleSearchChange = (event) => {
+//     setSearch(event.target.value);
+//   };
+
+//   const filteredProperties = properties.filter((property) =>
+//     property.propertyAddress.toLowerCase().includes(search.toLowerCase())
+//   );
+
+//   return (
+//     <div className="list-container">
+//       <div className="search-bar">
+//         <input
+//           type="text"
+//           placeholder="Search by address"
+//           value={search}
+//           onChange={handleSearchChange}
+//         />
+//       </div>
+//       <h1>Property Images</h1>
+//       {filteredProperties.map((property, index) => (
+//         <div className="property-details" key={index}>
+//           <img src={images[index]} alt={`Property Image ${index}`} className="list-image" />
+//           <p>Property ID: {property.propertyId}</p>
+//           <p>Address: {property.propertyAddress}</p>
+//           <p>Price: {deals[index]?.propertyPrice}</p>
+//           {/* Find the corresponding category type */}
+//           {categories.find((category) => category.categoryTypeId === property.categoryTypeId) && (
+//             <p>Category: {categories.find((category) => category.categoryTypeId === property.categoryTypeId).categoryType}</p>
+//           )}
+//           <Link to={`/Property/BuyProperty/${property.propertyId}`}>
+//             <Button variant="primary">Buy</Button>
+//           </Link>
+//           <MDBBtn color="secondary">Enquiry</MDBBtn>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// };
+
+// export default List;
+
+
+
+
 import './List1.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -551,65 +681,44 @@ const List = () => {
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    const fetchImagesData = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8081/image/fileSystem/get');
-        setImagesData(response.data);
+        const [imagesResponse, propertiesResponse, dealsResponse, categoriesResponse] = await Promise.all([
+          axios.get('http://localhost:8081/image/fileSystem/get'),
+          axios.get('http://localhost:8081/property/fetch'),
+          axios.get('http://localhost:8081/deal/fetch'),
+          axios.get('http://localhost:8081/propertycategory/fetchall')
+        ]);
+
+        setImagesData(imagesResponse.data);
+        setProperties(propertiesResponse.data);
+        setDeals(dealsResponse.data);
+        setCategories(categoriesResponse.data);
       } catch (error) {
-        console.error('Error fetching images data:', error);
+        console.error('Error fetching data:', error);
       }
     };
 
-    const findallproperties = async () => {
-      try {
-        const response = await axios.get('http://localhost:8081/property/fetch');
-        setProperties(response.data);
-      } catch (error) {
-        console.error('Error fetching properties:', error);
-      }
-    };
-
-    const fetchDeals = async () => {
-      try {
-        const response = await axios.get('http://localhost:8081/deal/fetch');
-        setDeals(response.data);
-      } catch (error) {
-        console.error('Error fetching deals:', error);
-      }
-    };
-
-    const fetchCategories = async () => {
-      try {
-        const response = await axios.get('http://localhost:8081/propertycategory/fetchall');
-        setCategories(response.data);
-      } catch (error) {
-        console.error('Error fetching categories:', error);
-      }
-    };
-
-    fetchImagesData();
-    findallproperties();
-    fetchDeals();
-    fetchCategories();
+    fetchData();
   }, []);
 
   const fetchAndDisplayImages = async () => {
-    const encodedImages = await Promise.all(
-      imagesData.map(async (image) => {
-        try {
+    try {
+      const encodedImages = await Promise.all(
+        imagesData.map(async (image) => {
           const response = await axios.get(`http://localhost:8081/image/fileSystem/${image.name}`, {
             responseType: 'blob',
           });
           const blob = new Blob([response.data], { type: image.type });
           return URL.createObjectURL(blob);
-        } catch (error) {
-          console.error('Error fetching image:', error);
-          return null;
-        }
-      })
-    );
+        })
+      );
 
-    return encodedImages;
+      return encodedImages;
+    } catch (error) {
+      console.error('Error fetching and displaying images:', error);
+      return [];
+    }
   };
 
   useEffect(() => {
@@ -626,7 +735,7 @@ const List = () => {
   };
 
   const filteredProperties = properties.filter((property) =>
-    property.propertyAddress.toLowerCase().includes(search.toLowerCase())
+    property.propertyAddress?.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -646,7 +755,7 @@ const List = () => {
           <p>Property ID: {property.propertyId}</p>
           <p>Address: {property.propertyAddress}</p>
           <p>Price: {deals[index]?.propertyPrice}</p>
-          {/* Find the corresponding category type */}
+          
           {categories.find((category) => category.categoryTypeId === property.categoryTypeId) && (
             <p>Category: {categories.find((category) => category.categoryTypeId === property.categoryTypeId).categoryType}</p>
           )}

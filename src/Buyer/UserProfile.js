@@ -1,18 +1,24 @@
 import React from 'react';
-import '../List1.css'
+
 const UserProfile = () => {
-  // Fetch user data from local storage
-  const userData = JSON.parse(localStorage.getItem('loggedInUser'));
+  // Retrieve user data from session storage
+  const userData = JSON.parse(sessionStorage.getItem('user'));
+
+  // Function to handle logout
+  const handleLogout = () => {
+    // Clear session storage
+    sessionStorage.removeItem('user');
+    // Redirect to the login page
+    window.location.href = '/Home'; // Change '/login' to the path of your login page
+  };
 
   return (
     <div>
-      {userData && (
-        <div>
-          <p>Welcome, {userData.usernameOrEmail}!</p>
-          <p>Email: {userData.email}</p>
-          {/* Add more user information as needed */}
-        </div>
-      )}
+      <h3>User Profile</h3>
+      <p><strong>Name:</strong> {userData.buyersFirstName} {userData.buyersLastName}</p>
+      <p><strong>Email:</strong> {userData.buyerEmail}</p>
+      {/* Add other user profile information here */}
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };

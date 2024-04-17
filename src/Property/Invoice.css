@@ -1,0 +1,121 @@
+.invoice-container {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+  }
+  
+  .invoice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .invoice-id {
+    font-size: 18px;
+  }
+  
+  .actions button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  
+  .invoice-details {
+    margin-bottom: 20px;
+  }
+  
+  .invoice-details .to-name {
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .invoice-details .to-address {
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  .invoice-logo {
+    margin-left: auto;
+    text-align: right;
+  }
+  
+  .invoice-logo img {
+    width: 100px;
+    margin-bottom: 10px;
+  }
+  
+  .invoice-content {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 20px 0;
+    margin-bottom: 20px;
+  }
+  
+  .invoice-header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .invoice-number {
+    font-size: 16px;
+  }
+  
+  .creation-date,
+  .invoice-status {
+    font-size: 14px;
+  }
+  
+  .invoice-table-container {
+    overflow-x: auto;
+  }
+  
+  .invoice-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .invoice-table th,
+  .invoice-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .invoice-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .additional-notes {
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  
+  .invoice-totals {
+    text-align: right;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  
+  .invoice-totals span {
+    font-weight: bold;
+  }
+  
+  .pay-button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .pay-button:hover {
+    background-color: #218838;
+  }
+  
